@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freedomsoccer.iml" filepath="$PROJECT_DIR$/.idea/modules/freedomsoccer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freedomsoccer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/freedomsoccer_main.iml" group="freedomsoccer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freedomsoccer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/freedomsoccer_test.iml" group="freedomsoccer" />
+    </modules>
+  </component>
+</project>
