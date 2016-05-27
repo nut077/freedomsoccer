@@ -9,13 +9,11 @@
   <link type="text/css" rel="stylesheet" href="/public/css/materialize.min.css"
         th:href="@{/public/css/materialize.min.css}" media="screen,projection"/>
   <link type="text/css" rel="stylesheet" href="/public/css/freedom.css" th:href="@{/public/css/freedom.css}"/>
-  <link type="text/css" rel="stylesheet" href="/public/css/sweetalert2.min.css"
-        th:href="@{/public/css/sweetalert2.min.css}"/>
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="/public/js/jquery-2.2.3.min.js" th:src="@{/public/js/jquery-2.2.3.min.js}"></script>
   <script src="/public/js/materialize.min.js" th:src="@{/public/js/materialize.min.js}"></script>
-  <script src="/public/js/sweetalert2.min.js" th:src="@{/public/js/sweetalert2.min.js}"></script>
 </head>
 <body>
 <header>
@@ -35,9 +33,6 @@
             <i class="material-icons right">arrow_drop_down</i>
           </a>
         </li>
-        <li sec:authorize="isAuthenticated()"><a href="/posts/list/">Posts</a></li>
-        <li sec:authorize="isAuthenticated()"><a href="/authors/list/">Author</a></li>
-        <li sec:authorize="isAuthenticated()"><a href="/rests/">Rest</a></li>
         <li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
         <li>
           <form sec:authorize="isAuthenticated()" name="form" th:action="@{/logout}" method="post" class="form-inline">
@@ -48,9 +43,6 @@
       <ul class="side-nav" id="mobile-demo">
         <li sec:authorize="isAuthenticated()" class="active"><a href="" sec:authentication="name"></a></li>
         <li sec:authorize="isAuthenticated()"><a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin/">Admin</a></li>
-        <li sec:authorize="isAuthenticated()"><a href="/posts/">Posts</a></li>
-        <li sec:authorize="isAuthenticated()"><a href="/authors/">Author</a></li>
-        <li sec:authorize="isAuthenticated()"><a href="/rests/">Rest</a></li>
         <li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
         <li>
           <form sec:authorize="isAuthenticated()" name="form" th:action="@{/logout}" method="post" class="form-inline">
