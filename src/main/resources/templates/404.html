@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+  <title>404</title>
+</head>
+<body>
+  <main layout:fragment="content">
+    <h3 class="center">Page Not Found</h3>
+    <p class="center" th:text="${error}"></p>
+  </main>
+</body>
+</html>
