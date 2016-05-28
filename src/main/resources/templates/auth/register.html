@@ -7,7 +7,7 @@
 </head>
 <body>
 <main layout:fragment="content">
-  <form th:action="@{/register}" method="post" th:object="${user}">
+  <form th:action="@{/register}" id="formValidate" method="post" th:object="${user}">
     <br/>
     <div class="row">
       <div class="col s12 m8 offset-m2">
@@ -53,6 +53,44 @@
       </div>
     </div>
   </form>
+  <script th:src="|@{/public/js/jquery.validate.min.js}|" src="/js/jquery.validate.min.js"></script>
+  <script>
+    $('#formValidate').validate({
+      rules: {
+        username: {
+          required: true,
+          minlength: 5
+        },
+        password: {
+          required: true,
+          minlength: 8
+        },
+        firstName: "required",
+        lastName: "required",
+        email: {
+          required: true,
+          email: true
+        }
+      },
+      messages: {
+        username: {
+          minlength: "Enter at least 5 characters"
+        },
+        password: {
+          minlength: "Enter at least 8 characters"
+        }
+      },
+      errorElement: 'div',
+      errorPlacement: function(error, element) {
+        var placement = $(element).data('error');
+        if (placement) {
+          $(placement).append(error)
+        } else {
+          error.insertAfter(element);
+        }
+      }
+    });
+  </script>
 </main>
 </body>
 </html>
