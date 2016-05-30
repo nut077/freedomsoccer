@@ -3,6 +3,7 @@ package com.freedomsoccer.domain;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import sun.plugin.util.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -31,4 +32,5 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_name")}
     )
     private List<Role> roles;
+
 }

@@ -52,6 +52,18 @@
       </div>
     </div>
   </form>
+  <script>
+    $('form#login').validate({
+      rules: {
+        username: {
+          required: true
+        },
+        password: {
+          required: true
+        }
+      }
+    });
+  </script>
 </main>
 </body>
 </html>

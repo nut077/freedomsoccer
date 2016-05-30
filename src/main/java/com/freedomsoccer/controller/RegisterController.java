@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -31,13 +33,28 @@ public class RegisterController {
             return "auth/register";
         } else {
             Role role = new Role();
-            role.setName("ADMIN");
-            role.setRole("ROLE_ADMIN");
+            role.setName("USER");
+            role.setRole("ROLE_USER");
             List<Role> roleList = Arrays.asList(role);
             user.setRoles(roleList);
-            User user1 = userServiceImpl.save(user);
-            return "auth/register";
+            userServiceImpl.save(user);
+            return "redirect:/success-register";
         }
+    }
+
+    @RequestMapping("/success-register")
+    public String successRegister() {
+        return "auth/success-register";
+    }
+
+    @RequestMapping(value = "/check-username-register", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkUsernameRegister(String username) {
+        User user = userServiceImpl.getUsername(username);
+        if (user != null) {
+            return "false";
+        }
+        return "true";
     }
 
 }
