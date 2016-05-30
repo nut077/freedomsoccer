@@ -1,0 +1,26 @@
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+  <title>Login</title>
+  <link type="text/css" rel="stylesheet" href="/public/css/sweetalert2.min.css"
+        th:href="@{/public/css/sweetalert2.min.css}"/>
+  <script src="/public/js/sweetalert2.min.js" th:src="@{/public/js/sweetalert2.min.js}"></script>
+</head>
+<body>
+<main layout:fragment="content">
+  <form th:action="@{/login}" id="login" method="get">
+    <script>
+      swal(
+        'Register successful',
+        '',
+        'success'
+      ).then(function() {
+        $('form#login').submit();
+      });
+    </script>
+  </form>
+</main>
+</body>
+</html>
