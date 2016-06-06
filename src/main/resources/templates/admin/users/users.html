@@ -1,0 +1,39 @@
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layouts/main">
+<head>
+  <title>Register</title>
+</head>
+<body>
+<main layout:fragment="content">
+  <form th:action="@{/user}" id="formValidate" method="post">
+    <br/>
+    <div class="row">
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user :${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td><a th:href="|@{/admin/users/edit/}${user.username}|">edit</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</main>
+</body>
+</html>
