@@ -33,4 +33,7 @@ public class User {
     )
     private List<Role> roles;
 
+    public String toString() {
+        return "User [username=" + username + "]";
+    }
 }
