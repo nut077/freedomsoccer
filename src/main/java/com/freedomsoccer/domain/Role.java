@@ -18,7 +18,7 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
     public String toString() {
-        return "Role [role=" + name + "]";
+        return name;
     }
     @Override
     public int hashCode() {

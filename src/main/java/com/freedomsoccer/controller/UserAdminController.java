@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
@@ -33,19 +34,19 @@ public class UserAdminController {
     }
 
     @RequestMapping(value = "/users/edit", method = RequestMethod.POST)
-    public String save(@Valid User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
+    public String save(@Valid User user, BindingResult bindingResult, Model model, HttpServletRequest req) {
+        User user1 = userServiceImpl.getUsername(user.getUsername());
+        user.setPassword(user1.getPassword());
+        if (bindingResult.hasErrors() && bindingResult.hasFieldErrors("username")) {
+            model.addAttribute("ros", roleServiceImpl.list());
+            model.addAttribute("success", false);
             return "admin/users/edit";
         } else {
-            List<User> users = Arrays.asList(user);
-            Role role = new Role();
-            role.setName("USER");
-            role.setRole("ROLE_USER");
-            role.setUsers(users);
-            List<Role> roleList = Arrays.asList(role);
-            user.setRoles(roleList);
+            Role role = roleServiceImpl.getRoleByName(req.getParameter("roles"));
+            user.setRoles(Arrays.asList(role));
             userServiceImpl.save(user);
             model.addAttribute("ros", roleServiceImpl.list());
+            model.addAttribute("success", true);
             return "admin/users/edit";
         }
     }
@@ -54,6 +55,7 @@ public class UserAdminController {
     public String edit(@PathVariable("username") String username, Model model) {
         model.addAttribute("user", userServiceImpl.getUsername(username));
         model.addAttribute("ros", roleServiceImpl.list());
+        model.addAttribute("success", false);
         return "admin/users/edit";
     }
 }

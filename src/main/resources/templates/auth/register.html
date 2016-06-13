@@ -89,7 +89,16 @@
         lastName: "required",
         email: {
           required: true,
-          email: true
+          email: true,
+          remote: {
+            url: "check-email-register",
+            type: "get",
+            data: {
+              email: function() {
+                return $('input#email').val();
+              }
+            }
+          }
         }
       },
       messages: {
@@ -102,6 +111,9 @@
         },
         password_confirm: {
           equalTo: "Enter the same password as above"
+        },
+        email: {
+          remote: "Email is duplicate"
         }
       },
       errorElement: 'div',

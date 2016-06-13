@@ -9,4 +9,5 @@ public interface UserService {
     public User save(User user);
     public void delete(User user);
     public User getUsername(String username);
+    public User getEmail(String email);
 }

@@ -57,4 +57,14 @@ public class RegisterController {
         return "true";
     }
 
+    @RequestMapping(value = "/check-email-register", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkEmailRegister(String email) {
+        User user = userServiceImpl.getEmail(email);
+        if (user != null) {
+            return "false";
+        }
+        return "true";
+    }
+
 }
