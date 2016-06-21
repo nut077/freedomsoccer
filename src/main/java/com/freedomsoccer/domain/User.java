@@ -3,7 +3,6 @@ package com.freedomsoccer.domain;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import sun.plugin.util.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -25,10 +24,10 @@ public class User {
     @NotEmpty
     @Email
     private String email;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = {@JoinColumn(name="user_username")},
+            joinColumns = {@JoinColumn(name = "user_username")},
             inverseJoinColumns = {@JoinColumn(name = "role_name")}
     )
     private List<Role> roles;

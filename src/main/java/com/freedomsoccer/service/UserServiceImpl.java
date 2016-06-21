@@ -44,12 +44,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void delete(String username) {
+        userRepository.delete(username);
+    }
+
+    @Override
     public void delete(User user) {
         userRepository.delete(user);
     }
 
     @Override
-    public User getUsername(String username) {
+    public User getUser(String username) {
         return userRepository.findOne(username);
     }
 

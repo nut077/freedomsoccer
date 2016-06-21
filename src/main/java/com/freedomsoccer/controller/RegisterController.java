@@ -50,7 +50,7 @@ public class RegisterController {
     @RequestMapping(value = "/check-username-register", method = RequestMethod.GET)
     @ResponseBody
     public String checkUsernameRegister(String username) {
-        User user = userServiceImpl.getUsername(username);
+        User user = userServiceImpl.getUser(username);
         if (user != null) {
             return "false";
         }

@@ -4,6 +4,9 @@
       layout:decorator="layouts/main">
 <head>
   <title>Register</title>
+  <link type="text/css" rel="stylesheet" href="/public/css/sweetalert2.min.css"
+        th:href="@{/public/css/sweetalert2.min.css}"/>
+  <script th:src="@{/public/js/sweetalert2.min.js}" src="/public/js/sweetalert2.min.js" ></script>
 </head>
 <body>
 <main layout:fragment="content">
@@ -14,25 +17,37 @@
         <thead>
           <tr>
             <th>Username</th>
-            <th>Password</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="user :${users}">
             <td th:text="${user.username}"></td>
-            <td th:text="${user.password}"></td>
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.email}"></td>
             <td><a th:href="|@{/admin/users/edit/}${user.username}|">edit</a></td>
+            <td><a th:href="|@{/admin/users/delete/}${user.username}|">delete</a></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <span th:if="${message}">
+      <script th:inline="javascript">
+        /*<![CDATA[*/
+        var message = [[${message}]];
+        /*]]>*/
+        swal(
+          message,
+          '',
+          'success'
+        );
+      </script>
+    </span>
   </form>
 </main>
 </body>
