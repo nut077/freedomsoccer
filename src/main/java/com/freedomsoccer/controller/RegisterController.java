@@ -2,7 +2,9 @@ package com.freedomsoccer.controller;
 
 import com.freedomsoccer.domain.Role;
 import com.freedomsoccer.domain.User;
+import com.freedomsoccer.service.NotificationService;
 import com.freedomsoccer.service.UserService;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +19,14 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@Log4j
 public class RegisterController {
 
     @Autowired
     private UserService userServiceImpl;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
@@ -37,6 +43,7 @@ public class RegisterController {
             role.setRole("ROLE_USER");
             List<Role> roleList = Arrays.asList(role);
             user.setRoles(roleList);
+            notificationService.sendNotification(user);
             userServiceImpl.save(user);
             return "redirect:/success-register";
         }
@@ -60,11 +67,15 @@ public class RegisterController {
     @RequestMapping(value = "/check-email-register", method = RequestMethod.GET)
     @ResponseBody
     public String checkEmailRegister(String email) {
-        User user = userServiceImpl.getEmail(email);
-        if (user != null) {
-            return "false";
+        try {
+            User user = userServiceImpl.getEmail(email);
+            if (user == null) {
+                return "true";
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
         }
-        return "true";
+        return "false";
     }
 
 }
